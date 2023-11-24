@@ -3,8 +3,8 @@ var AktualnaMapa=0;
 var Graczheight = 50*Y;
 var Graczwidth = 50*X;
 
-var szybkosc = 5;
-var grawitacja = 10;
+var szybkosc = 5*X;
+var grawitacja = 15*Y;
 
 //document.documentElement.requestFullscreen();
 function ZmienAktualnaMape(id)
@@ -73,9 +73,10 @@ function RysujGracza()
     element.id = "gracz";
     element.style.height = Graczheight + "px";
     element.style.width = Graczwidth + "px";
-    element.style.top = 500*Y+"px";
-    element.style.left = 410*X+"px";
+    element.style.top = PozycjaY+"px";
+    element.style.left = PozycjaX+"px";
     document.getElementById("Tlo").appendChild(element);
+    console.log(PozycjaX," | ",PozycjaY);
 }
 var Spada = false;
 
@@ -108,7 +109,7 @@ var ZmienMape=3;
 function ZmienRozdzielczosc(f)
 {
     // OknoY = OknoY*(screen.height/OknoY);
-    document.getElementById("Tlo").style.height = OknoY*Y + 'px';
+    document.getElementById("Tlo").style.height = OknoY*Y+ 'px';
 
     // OknoX = OknoX*(screen.width/OknoX);
     document.getElementById("Tlo").style.width = OknoX*X + 'px';

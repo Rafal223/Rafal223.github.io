@@ -1,7 +1,8 @@
 var OknoX = 1080;
 var OknoY = 630;
-var Y = (screen.height/OknoY)-0.2;
-var X = (screen.width/OknoX)-0.2;
+
+var Y = (screen.availHeight/OknoY)-0.2;
+var X = (screen.availWidth/OknoX)-0.2;
 
 //[id,x,y]
 var mapa=[

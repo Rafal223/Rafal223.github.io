@@ -6,7 +6,7 @@ function SprawdzStroneKolizji(IdKolizji)
     let OdlegloscGory = mapa[AktualnaMapa][IdKolizji][2] 
     let OdlegloscPrawej = mapa[AktualnaMapa][IdKolizji][1]+id[mapa[AktualnaMapa][IdKolizji][0]][3] 
     let OdlegloscDolnej = mapa[AktualnaMapa][IdKolizji][2]+id[mapa[AktualnaMapa][IdKolizji][0]][2]
-    let PozycjaGracza=[PozycjaX+(Graczheight/2),PozycjaY+(Graczwidth/2)];
+    let PozycjaGracza=[PozycjaX+(Graczwidth/2),PozycjaY+(Graczheight/2)];
 
     if(PozycjaGracza[0]+(Graczwidth/2)<=OdlegloscLewej && PozycjaGracza[1]-(Graczheight/2)>=OdlegloscDolnej ||
      PozycjaGracza[0]+(Graczwidth/2)<=OdlegloscLewej && PozycjaGracza[1]+(Graczheight/2)<=OdlegloscGory ||

@@ -52,8 +52,8 @@ function Skocz()
     WykonujeSkok = true;
 }
 
-var PozycjaX = 410;
-var PozycjaY = 500;
+var PozycjaX = 410*X;
+var PozycjaY = 500*Y;
 
 var Skok = 0;
 var CanMove = true;
@@ -64,8 +64,8 @@ function Ruszaj()
     for(var direction in przyciski){
         if(direction == 32 && CanJump && WykonujeSkok==false)
         {
-            MocSkoku=10*Y;
-            CzyLewo=10*X;
+            MocSkoku=10;
+            CzyLewo=10;
             if(przyciski[37] != null)
             {
                 lewo=false;
@@ -90,7 +90,7 @@ function Ruszaj()
         else if(direction == 37 && CanMove)
         {
             var left = parseInt(Gracz.style.left) || 0;
-            Gracz.style.left = PozycjaX - szybkosc+ 'px';
+            Gracz.style.left = left - szybkosc+ 'px';
             PozycjaX = left - szybkosc;
         }
         else if(direction == 39 && CanMove)
@@ -111,10 +111,10 @@ function KoniecSkoku()
     Skok=0;
     WykonujeSkok=false;
     CzyLewo=0;
-    MocSkoku=10*Y;
+    MocSkoku=10;
 }
 
-var MocSkoku=10*Y;
+var MocSkoku=10;
 var CzyLewo = 0;
 function SkokNarciarz(A,B,kierunek)
 {
@@ -125,26 +125,26 @@ function SkokNarciarz(A,B,kierunek)
     B /= Skok/100
     if(Czas<30*(Skok/100))
     {
-        PozycjaY = PozycjaY-(MocSkoku*1.5*Skok/100);
+        PozycjaY = PozycjaY-(MocSkoku*(1.5*Y)*Skok/100);
         MocSkoku-=0.3+(0.3*((100-Skok)/100));
     }
     else if(Czas>=30*(Skok/100) && Czas<=60*(Skok/100))
     {
-        PozycjaY = PozycjaY+(MocSkoku*1.5*Skok/100);
+        PozycjaY = PozycjaY+(MocSkoku*(1.5*Y)*Skok/100);
         MocSkoku+=0.3+(0.3*((100-Skok)/100));
     }
     else
     {
-        grawitacja=15;
+        grawitacja=15*Y;
     }
 
     if(kierunek==1)
     {
-        PozycjaX = PozycjaX+(CzyLewo*Skok/100)*1.2;
+        PozycjaX = PozycjaX+(CzyLewo*Skok/100)*(1.2*X);
     }
     else if (kierunek==2)
     {
-        PozycjaX = PozycjaX+(-CzyLewo*Skok/100)*1.2;
+        PozycjaX = PozycjaX+(-CzyLewo*Skok/100)*(1.2*X);
     }
     Gracz.style.left = PozycjaX + 'px';
     Gracz.style.top = PozycjaY + 'px';
