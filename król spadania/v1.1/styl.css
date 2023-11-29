@@ -64,7 +64,6 @@ body
     overflow: hidden;
     z-index: 3;
     animation: Rotacja 0.2s infinite linear;
-    border: 1px solid black;
 }
 p
 {
