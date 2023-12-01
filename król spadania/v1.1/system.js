@@ -24,18 +24,17 @@ function UsunObiekty()
 
 function ZmienTloMapy(AM)
 {
-    if(AM==0)
+    document.getElementById("Tlo").style.backgroundImage = "url(Resources/Mapy/"+AM+".png)";
+}
+
+var ListaoBrazow = [];
+function UsunObrazy()
+{
+    for(i=0;i<ListaoBrazow.length;i++)
     {
-        document.getElementById("Tlo").style.backgroundImage = "url(Resources/Mapy/0.png)";
+        document.getElementById(ListaoBrazow[i]).remove();
     }
-    else if(AM==1)
-    {
-        document.getElementById("Tlo").style.backgroundImage = "url(Resources/Mapy/1.png)";
-    }
-    else
-    {
-        document.getElementById("Tlo").style.backgroundImage = "none";
-    }
+    ListaoBrazow=[];
 }
 
 function RysujObiekty(amapa)
@@ -56,19 +55,32 @@ function RysujObiekty(amapa)
     if(AktualnaMapa==0)
     {
         var element = document.createElement("img");
-        element.id = "syzyf";
+        element.id = "img"+ListaoBrazow.length;
         element.src = "Resources/syzyf.gif";
-        element.alt = "Syzyf już kamień wtoczył tak o ;/";
         element.style.height= 100 +"px";
         element.style.width= 100 + "px";
         element.style.top = 510 + "px";
         element.style.left = 730 + "px";
         element.style.position = "absolute";
         document.getElementById("Tlo").appendChild(element);
+        ListaoBrazow.push("img"+ListaoBrazow.length);
     }
-    else if (AktualnaMapa!=0 && document.getElementById('syzyf')!=null)
+    else if(AktualnaMapa==9)
     {
-        document.getElementById("syzyf").remove();
+        var element = document.createElement("img");
+        element.id = "img"+ListaoBrazow.length;
+        element.src = "Resources/goblin.gif";
+        element.style.height= 50 +"px";
+        element.style.width= 50 + "px";
+        element.style.top = 206 + "px";
+        element.style.left = 505 + "px";
+        element.style.position = "absolute";
+        document.getElementById("Tlo").appendChild(element);
+        ListaoBrazow.push("img"+ListaoBrazow.length);
+    }
+    else
+    {
+        UsunObrazy();
     }
 }
 
