@@ -257,6 +257,7 @@ function Gra()
     grawitacja=10;
     Kolizje();
     Ruszaj();
+    requestAnimationFrame(Gra);
 }
 
 function DwaZera(num, Totalength)
@@ -284,4 +285,4 @@ var id = [
 RysujObiekty(mapa[AktualnaMapa]);
 RysujGracza();
 var Gracz = document.getElementById('gracz');
-setInterval(Gra,16);
+Gra();
