@@ -1,11 +1,3 @@
-function SpadaWDol()
-{
-    if(Spada)
-    {
-        CanMove=false;
-        CanJump=false;
-    }
-}
 
 //poruszanie sie na telefonie
 
@@ -44,6 +36,70 @@ document.addEventListener("keyup",function(e)
 
 var prawo = false;
 var lewo = false;
+
+var posx;
+var posy;
+var moc;
+var mapka;
+
+function CzarnaDziura(posx,posy,moc,mapka)
+{
+    let odlegloscx = PozycjaX-posx;
+    let odlegloscy = PozycjaY-posy;
+
+    if(Math.abs(PozycjaX-posx)<300 && Math.abs(PozycjaY-posy)<300)
+    {
+        moc*=2;
+    }
+    if(Math.abs(PozycjaX-posx)<150 && Math.abs(PozycjaY-posy)<150)
+    {
+        moc*=2;
+    }
+    if(Math.abs(PozycjaX-posx)>=150 && Math.abs(PozycjaY-posy)>=150)
+    {
+        moc/=2;
+    }
+    if(Math.abs(PozycjaX-posx)>=300 && Math.abs(PozycjaY-posy)>=300)
+    {
+        moc/=2;
+    }
+    if(WykonujeSkok)
+    {
+        if(odlegloscx<0)
+        {
+            PozycjaX+=moc;
+        }
+        else if(odlegloscx>0)
+        {
+            PozycjaX-=moc;
+        }
+        if(odlegloscy<0)
+        {
+            PozycjaY+=moc
+        }
+        else if(odlegloscy>0)
+        {
+            PozycjaY-=moc;
+        }
+    }
+    else
+    {
+        moc = moc/4;
+        if(odlegloscx<0)
+        {
+            PozycjaX+=moc;
+        }
+        else if(odlegloscx>0)
+        {
+            PozycjaX-=moc;
+        }
+    }
+    if(AktualnaMapa!=mapka)
+    {
+        listagrawitacji.shift(0);
+    }
+}
+
 
 function Skocz()
 {
@@ -216,4 +272,12 @@ function SkokNarciarz(A,B,kierunek)
     Gracz.style.top = PozycjaY + 'px';
     Czas+=1;
     NajblizszyObiekt=[null];
+}
+function SpadaWDol()
+{
+    if(Spada)
+    {
+        CanMove=false;
+        CanJump=false;
+    }
 }

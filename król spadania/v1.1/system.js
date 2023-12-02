@@ -3,7 +3,7 @@ var AktualnaMapa=0;
 var OknoX = 1080;
 var OknoY = 630;
 
-var szybkosc = 5;
+var szybkosc = 4;
 var grawitacja = 10;
 
 
@@ -37,6 +37,21 @@ function UsunObrazy()
     ListaoBrazow=[];
 }
 
+function DodajObrazy(obraz,wysokosc,szerokosc,x,y)
+{
+    var element = document.createElement("div");
+    element.id = "img"+ListaoBrazow.length;
+    element.style.backgroundSize = "100%";
+    element.style.backgroundImage = "url("+obraz+")";
+    element.style.height= wysokosc +"px";
+    element.style.width= szerokosc + "px";
+    element.style.top = y + "px";
+    element.style.left = x + "px";
+    element.style.position = "absolute";
+    document.getElementById("Tlo").appendChild(element);
+    ListaoBrazow.push("img"+ListaoBrazow.length);
+}
+
 function RysujObiekty(amapa)
 {
     for(i=0;i<amapa.length; i++)
@@ -54,29 +69,35 @@ function RysujObiekty(amapa)
     ZmienTloMapy(AktualnaMapa);
     if(AktualnaMapa==0)
     {
-        var element = document.createElement("img");
-        element.id = "img"+ListaoBrazow.length;
-        element.src = "Resources/syzyf.gif";
-        element.style.height= 100 +"px";
-        element.style.width= 100 + "px";
-        element.style.top = 510 + "px";
-        element.style.left = 730 + "px";
-        element.style.position = "absolute";
-        document.getElementById("Tlo").appendChild(element);
-        ListaoBrazow.push("img"+ListaoBrazow.length);
+        UsunObrazy();
+        DodajObrazy("Resources/syzyf.gif",100,100,730,510);
     }
     else if(AktualnaMapa==9)
     {
-        var element = document.createElement("img");
-        element.id = "img"+ListaoBrazow.length;
-        element.src = "Resources/goblin.gif";
-        element.style.height= 50 +"px";
-        element.style.width= 50 + "px";
-        element.style.top = 206 + "px";
-        element.style.left = 505 + "px";
-        element.style.position = "absolute";
-        document.getElementById("Tlo").appendChild(element);
-        ListaoBrazow.push("img"+ListaoBrazow.length);
+        UsunObrazy();
+        DodajObrazy("Resources/goblin.gif",50,50,505,206)
+    }
+    else if(AktualnaMapa==10)
+    {
+        UsunObrazy();
+        DodajObrazy("Resources/Czarnakula.gif",100,100,100,510)
+        listagrawitacji.push([100,510,1,10]);
+    }
+    else if(AktualnaMapa==11)
+    {
+        UsunObrazy();
+        DodajObrazy("Resources/Czarnakula.gif",100,100,900,510)
+        listagrawitacji.push([900,510,1,11]);
+    }
+    else if(AktualnaMapa==12)
+    {
+        UsunObrazy();
+        DodajObrazy("Resources/Czarnakula.gif",100,100,205,575)
+        listagrawitacji.push([205,575,1,12]);
+        DodajObrazy("Resources/Czarnakula.gif",100,100,545,300)
+        listagrawitacji.push([545,300,1,12]);
+        DodajObrazy("Resources/Czarnakula.gif",100,100,845,200)
+        listagrawitacji.push([845,200,1,12]);
     }
     else
     {
@@ -105,6 +126,7 @@ function RysujGracza()
     element.style.backgroundImage= "url(Resources/KS-prawo.png)";
     document.getElementById("Tlo").appendChild(element);
 }
+
 var Spada = false;
 
 let pierwszyraz = 0;
@@ -135,18 +157,17 @@ var ZmienMape=3;
 
 var PoruszaSie = false;
 var Strona=1;
+
+var listagrawitacji = []
 function Gra()
 {
-    if(PoruszaSie==false)
+    if(Strona==1)
     {
-        if(Strona==1)
-        {
-            AnimacjaGracza("url(Resources/KS-prawo.png)");
-        }
-        else
-        {
-            AnimacjaGracza("url(Resources/KS-lewo.png)");
-        }
+        AnimacjaGracza("url(Resources/KS-prawo.png)");
+    }
+    else
+    {
+        AnimacjaGracza("url(Resources/KS-lewo.png)");
     }
 
     if(grawitacja>0)
@@ -255,11 +276,19 @@ function Gra()
         Skok=100;
     }
     grawitacja=10;
+
+    if(listagrawitacji.length>0)
+    {
+        for(i=0;i<listagrawitacji.length;i++)
+        {
+            CzarnaDziura(listagrawitacji[i][0],listagrawitacji[i][1],listagrawitacji[i][2],listagrawitacji[i][3]);
+        }
+    }
+
     Kolizje();
     Ruszaj();
     requestAnimationFrame(Gra);
 }
-
 function DwaZera(num, Totalength)
 {
     return String(num).padStart(Totalength,'0');
