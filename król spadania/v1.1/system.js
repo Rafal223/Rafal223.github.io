@@ -10,7 +10,7 @@ function ZaladujObrazkiTla() //prosty trik z ladowaniem mapy przed jej pokazanie
 {                            //ładujemy do bufora karty graficznej obrazek który będzie za chwile wykorzystywany
     let gora = document.getElementById("gora");
 
-    gora.style.backgroundImage = "url(Resources/Mapy/"+parseInt(AktualnaMapa+1)+".png)";
+    gora.style.backgroundImage = "url(Resources/mapy/"+parseInt(AktualnaMapa+1)+".png)";
 }
 
 function ZmienAktualnaMape(id)
@@ -216,8 +216,8 @@ function SprawdzGraniceMapy()
     }
     if(PozycjaY < 0) //do przodu
     {
-        ZmienMape=0;
         ZaladujObrazkiTla();
+        ZmienMape=0;
     }
     if(PozycjaY+50 > OknoY) //do tylu
     {
