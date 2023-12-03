@@ -6,6 +6,12 @@ var OknoY = 630;
 var szybkosc = 4;
 var grawitacja = 10;
 
+function ZaladujObrazkiTla() //prosty trik z ladowaniem mapy przed jej pokazaniem,
+{                            //ładujemy do bufora karty graficznej obrazek który będzie za chwile wykorzystywany
+    let gora = document.getElementById("gora");
+
+    gora.style.backgroundImage = "url(Resources/mapy/"+parseInt(AktualnaMapa+1)+".png)";
+}
 
 function ZmienAktualnaMape(id)
 {
@@ -94,10 +100,16 @@ function RysujObiekty(amapa)
         UsunObrazy();
         DodajObrazy("Resources/Czarnakula.gif",100,100,205,575)
         listagrawitacji.push([205,575,1,12]);
-        DodajObrazy("Resources/Czarnakula.gif",100,100,545,300)
-        listagrawitacji.push([545,300,1,12]);
         DodajObrazy("Resources/Czarnakula.gif",100,100,845,200)
         listagrawitacji.push([845,200,1,12]);
+    }
+    else if(AktualnaMapa==13)
+    {
+        UsunObrazy();
+        DodajObrazy("Resources/Czarnakula.gif",100,100,205,275)
+        listagrawitacji.push([205,575,1,13]);
+        DodajObrazy("Resources/Czarnakula.gif",100,100,845,100)
+        listagrawitacji.push([845,200,1,13]);
     }
     else
     {
@@ -129,57 +141,19 @@ function RysujGracza()
 
 var Spada = false;
 
-let pierwszyraz = 0;
-let poprzedniraz = 0;
-function SprawdzCzyPierwszyRaz()
-{
-    if(pierwszyraz!=0 && poprzedniraz==0)
-    {
-        poprzedniraz = pierwszyraz;
-    }
-    if(pierwszyraz==0)
-    {
-        pierwszyraz = 1;
-    }
-    if(pierwszyraz!=poprzedniraz)
-    {
-        return true;
-    }
-}
+var ZmienMape=3;
+var Strona=1;
+
+var listagrawitacji = []
+
 
 
 var MiniGameTime=0;
 var Sekundy = 0;
 var Minuty = 0;
 var Godziny = 0;
-
-var ZmienMape=3;
-
-var PoruszaSie = false;
-var Strona=1;
-
-var listagrawitacji = []
-function Gra()
+function LiczCzasGry()
 {
-    if(Strona==1)
-    {
-        AnimacjaGracza("url(Resources/KS-prawo.png)");
-    }
-    else
-    {
-        AnimacjaGracza("url(Resources/KS-lewo.png)");
-    }
-
-    if(grawitacja>0)
-    {
-        SpadaWDol();
-    }
-    else
-    {
-        Spada=true;
-    }
-    Gracz.style.top = PozycjaY+'px';
-    Gracz.style.left = PozycjaX+'px';
     MiniGameTime+=1;
     if(MiniGameTime>=60)
     {
@@ -196,6 +170,11 @@ function Gra()
             }
         }
     }
+    document.getElementById("text").innerHTML ="<p>Czas gry: "+DwaZera(Godziny,2)+":"+DwaZera(Minuty,2)+":"+DwaZera(Sekundy,2)+"</p>";
+}
+
+function SprawdzGraniceMapy()
+{
     if(ZmienMape==1)
     {
         PozycjaY = 0;
@@ -214,10 +193,6 @@ function Gra()
         RysujObiekty(mapa[AktualnaMapa]);
         ZmienMape=3;
     }
-
-    document.getElementById("text").innerHTML ="<p>Czas gry: "+DwaZera(Godziny,2)+":"+DwaZera(Minuty,2)+":"+DwaZera(Sekundy,2)+"</p>";
-    var A=10
-    var B=0.04
 
     if(PozycjaX+50 > OknoX)
     {
@@ -242,25 +217,54 @@ function Gra()
     if(PozycjaY < 0) //do przodu
     {
         ZmienMape=0;
+        ZaladujObrazkiTla();
     }
     if(PozycjaY+50 > OknoY) //do tylu
     {
         ZmienMape=1;
     }
+}
+
+function Gra()
+{
+    if(Strona==1)
+    {
+        AnimacjaGracza("url(Resources/KS-prawo.png)");
+    }
+    else
+    {
+        AnimacjaGracza("url(Resources/KS-lewo.png)");
+    }
+
+    if(grawitacja>0)
+    {
+        SpadaWDol();
+    }
+    else
+    {
+        Spada=true;
+    }
+
+    Gracz.style.top = PozycjaY+'px';
+    Gracz.style.left = PozycjaX+'px';
+
+    LiczCzasGry();
+
+    SprawdzGraniceMapy();
 
     if(WykonujeSkok)
     {
         if(prawo == false && lewo == true)
         {
-            SkokNarciarz(A,B,1);
+            SkokNarciarz(10,0.04,1);
         }
         else if(prawo == true && lewo == false)
         {
-            SkokNarciarz(A,B,2);
+            SkokNarciarz(10,0.04,2);
         }
         else
         {
-            SkokNarciarz(A,B,0);
+            SkokNarciarz(10,0.04,0);
         }
     }
 
@@ -289,12 +293,13 @@ function Gra()
     Ruszaj();
     requestAnimationFrame(Gra);
 }
+
 function DwaZera(num, Totalength)
 {
     return String(num).padStart(Totalength,'0');
 }
 
-//[id,img,height,width]
+//[id,kolor,height,width]
 var id = [
     [0,"pink",25,OknoX],
     [1,"lightgreen",25,200],
