@@ -135,7 +135,6 @@ function RysujGracza()
     element.id = "gracz";
     element.style.top = "500px";
     element.style.left = "410px";
-    element.style.backgroundImage= "url(Resources/KS-prawo.png)";
     document.getElementById("Tlo").appendChild(element);
 }
 
@@ -190,6 +189,7 @@ function SprawdzGraniceMapy()
         Gracz.style.top = PozycjaY + 'px';
         UsunObiekty();
         AktualnaMapa+=1;
+        ZaladujObrazkiTla();
         RysujObiekty(mapa[AktualnaMapa]);
         ZmienMape=3;
     }
@@ -216,7 +216,6 @@ function SprawdzGraniceMapy()
     }
     if(PozycjaY < 0) //do przodu
     {
-        ZaladujObrazkiTla();
         ZmienMape=0;
     }
     if(PozycjaY+50 > OknoY) //do tylu
@@ -229,11 +228,11 @@ function Gra()
 {
     if(Strona==1)
     {
-        AnimacjaGracza("url(Resources/KS-prawo.png)");
+        AnimacjaGracza(-50);
     }
     else
     {
-        AnimacjaGracza("url(Resources/KS-lewo.png)");
+        AnimacjaGracza(0);
     }
 
     if(grawitacja>0)

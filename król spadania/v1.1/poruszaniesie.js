@@ -115,12 +115,9 @@ var Skok = 0;
 var CanMove = true;
 var CanJump = true;
 
-function AnimacjaGracza(obrazek)
+function AnimacjaGracza(px)
 {
-    if(Gracz.style.backgroundImage!=obrazek);
-    {
-        Gracz.style.backgroundImage= obrazek;
-    }
+    Gracz.style.backgroundPositionX = px+"px";
 }
 
 function Ruszaj()
@@ -128,7 +125,7 @@ function Ruszaj()
     for(var direction in przyciski){
         if(direction == 32 && CanJump && WykonujeSkok==false)
         {
-            AnimacjaGracza("url(Resources/KS-kucek.png)");
+            AnimacjaGracza(-100)
 
             MocSkoku=10;
             CzyLewo=10;
@@ -160,7 +157,7 @@ function Ruszaj()
             var left = parseInt(Gracz.style.left) || 0;
             Gracz.style.left = PozycjaX - szybkosc+ 'px';
             PozycjaX = left - szybkosc;
-            AnimacjaGracza("url(Resources/KS-move-lewo.gif)");
+            AnimacjaGracza(-150);
             PoruszaSie=true;
             Strona=0;
         }
@@ -169,7 +166,7 @@ function Ruszaj()
             var left = parseInt(Gracz.style.left) || 0;
             Gracz.style.left = left + szybkosc + 'px';
             PozycjaX = left + szybkosc;
-            AnimacjaGracza("url(Resources/KS-move-prawo.gif)");
+            AnimacjaGracza(-200);
             PoruszaSie=true;
             Strona=1;
         }
@@ -214,11 +211,11 @@ function SkokNarciarz(A,B,kierunek)
     {
         if(Strona==1)
         {
-            AnimacjaGracza("url(Resources/KS-Skok2-prawo.png)");
+            AnimacjaGracza(-350);
         }
         else
         {
-            AnimacjaGracza("url(Resources/KS-Skok2-lewo.png)");
+            AnimacjaGracza(-400);
         }
         grawitacja=10;
     }
@@ -227,16 +224,16 @@ function SkokNarciarz(A,B,kierunek)
     {
         if(Odbilsie==0 && Czas<30*(Skok/100))
         {
-            AnimacjaGracza("url(Resources/KS-Skok1-prawo.png)");
+            AnimacjaGracza(-300);
         }
         else if(Odbilsie==1)
         {
-            AnimacjaGracza("url(Resources/KS-upadek.png)");
+            AnimacjaGracza(-450);
             Gracz.style.animationName = "Rotacja";
         }
         if(Odbilsie==0 && Czas>30*(Skok/100))
         {
-            AnimacjaGracza("url(Resources/KS-Skok2-prawo.png)");
+            AnimacjaGracza(-400);
         }
         PozycjaX = PozycjaX+(CzyLewo*Skok/100)*1.2;
     }
@@ -244,28 +241,42 @@ function SkokNarciarz(A,B,kierunek)
     {
         if(Odbilsie==0 && Czas<30*(Skok/100))
         {
-            AnimacjaGracza("url(Resources/KS-Skok1-lewo.png)");
+            AnimacjaGracza(-250);
         }
         else if(Odbilsie==1)
         {
-            AnimacjaGracza("url(Resources/KS-upadek.png)");
+            AnimacjaGracza(-450);
             Gracz.style.animationName = "Rotacja";
         }
         if(Odbilsie==0 && Czas>30*(Skok/100))
         {
-            AnimacjaGracza("url(Resources/KS-Skok2-lewo.png)");
+            AnimacjaGracza(-350);
         }
         PozycjaX = PozycjaX+(-CzyLewo*Skok/100)*1.2;
     }
     else
     {
-        if(Strona==1)
+        if(Czas<30*(Skok/100))
         {
-            AnimacjaGracza("url(Resources/KS-Skok1-prawo.png)");
+            if(Strona==1)
+            {
+                AnimacjaGracza(-300);
+            }
+            else
+            {
+                AnimacjaGracza(-250);
+            }
         }
         else
         {
-            AnimacjaGracza("url(Resources/KS-Skok1-lewo.png)");
+            if(Strona==1)
+            {
+                AnimacjaGracza(-400);
+            }
+            else
+            {
+                AnimacjaGracza(-350);
+            }
         }
     }
     Gracz.style.left = PozycjaX + 'px';

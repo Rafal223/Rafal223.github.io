@@ -59,11 +59,13 @@ body
 {
     height: 50px;
     width: 50px;
-    background-size: 100%;
+    background-size: 1000%;
+    background-repeat: no-repeat;
     position: absolute;
     overflow: hidden;
     z-index: 3;
     animation: Rotacja 0.2s infinite linear;
+    background-image: url("Resources/animacjegracza.gif");
 }
 p
 {
