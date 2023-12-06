@@ -103,7 +103,7 @@ function Kolizje()
                     }
                     if(ListaAktualnychObiektowDoKolizji[i][2]=="nalewo" || ListaAktualnychObiektowDoKolizji[i][2]=="naprawo")
                     {
-                        CzyLewo*=(-1)/2;
+                        CzyLewo*=(-1)/2*(Skok/100);
                         Odbilsie=1;
                     }
                 }

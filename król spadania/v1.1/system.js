@@ -201,7 +201,7 @@ function SprawdzGraniceMapy()
         if(WykonujeSkok==true)
         {
             Odbilsie=1;
-            CzyLewo*=(-1)/2;
+            CzyLewo*=(-1)/2*(Skok/100);
         }
     }
     if(PozycjaX < 0)
@@ -211,7 +211,7 @@ function SprawdzGraniceMapy()
         if(WykonujeSkok == true)
         {
             Odbilsie=1;
-            CzyLewo*=(-1)/2;
+            CzyLewo*=(-1)/2*(Skok/100);
         }
     }
     if(PozycjaY < 0) //do przodu
@@ -301,7 +301,7 @@ function DwaZera(num, Totalength)
 //[id,kolor,height,width]
 var id = [
     [0,"pink",25,OknoX],
-    [1,"lightgreen",25,200],
+    [1,"lightgreen",25,450],
     [2,"brown",25,150],
     [3,"blue",25,100],
     [4,"yellow",25,50],
