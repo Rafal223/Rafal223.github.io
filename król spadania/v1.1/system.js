@@ -313,7 +313,8 @@ var id = [
     [10,"pink",250,25],
     [11,"green",250,250],
     [12,"pink",OknoY,25],
-    [13,"pink",485,25]
+    [13,"pink",485,25],
+    [14,"pink",25,200]
 ];
 RysujObiekty(mapa[AktualnaMapa]);
 RysujGracza();
