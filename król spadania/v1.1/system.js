@@ -111,6 +111,11 @@ function RysujObiekty(amapa)
         DodajObrazy("Resources/Czarnakula.gif",100,100,845,100)
         listagrawitacji.push([845,200,1,13]);
     }
+    else if(AktualnaMapa==21)
+    {
+        UsunObrazy();
+        DodajObrazy("Resources/wiedzma.gif",100,100,990,480)
+    }
     else
     {
         UsunObrazy();
