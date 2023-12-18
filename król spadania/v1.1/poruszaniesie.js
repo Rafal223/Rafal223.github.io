@@ -28,7 +28,7 @@ document.addEventListener("keyup",function(e)
     {
         delete przyciski[e.keyCode];
 
-        if(Skok>=10)
+        if(e.keyCode == 32)
         {
             Skocz()
         }
@@ -103,9 +103,14 @@ function CzarnaDziura(posx,posy,moc,mapka)
 
 function Skocz()
 {
+    if(Skok<=20)
+    {
+        Skok=20;
+    }
     CanJump=false;
     CanMove=false;
     WykonujeSkok = true;
+    trzymaspacje=false;
 }
 
 var PozycjaX = 410;
@@ -120,6 +125,8 @@ function AnimacjaGracza(px)
     Gracz.style.backgroundPositionX = px+"px";
 }
 
+var trzymaspacje;
+
 function Ruszaj()
 {
     for(var direction in przyciski){
@@ -127,8 +134,9 @@ function Ruszaj()
         {
             AnimacjaGracza(-100)
 
-            MocSkoku=10;
-            CzyLewo=10;
+            trzymaspacje=true;
+            CanMove=false;
+
             if(przyciski[37] != null)
             {
                 lewo=false;
@@ -146,11 +154,6 @@ function Ruszaj()
                 lewo=false;
                 prawo=false;
             }
-            if(Skok<100)
-            {
-                Skok += 3.5;
-            }
-            CanMove=false;
         }
         else if(direction == 37 && CanMove)
         {
@@ -178,14 +181,14 @@ var Czas=0;
 
 function KoniecSkoku()
 {
+    Skok=0;
     Czas=0
     grawitacja=0;
-    Skok=0;
-    WykonujeSkok=false;
     CzyLewo=0;
     MocSkoku=10;
     Odbilsie=0;
     Gracz.style.animationName = "none";
+    WykonujeSkok=false;
 }
 
 var MocSkoku=10;

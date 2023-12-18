@@ -3,7 +3,7 @@ var PoprzedniObiekt = [];
 function SprawdzStroneKolizji(IdKolizji)
 {
     let OdlegloscLewej = mapa[AktualnaMapa][IdKolizji][1]
-    let OdlegloscGory = mapa[AktualnaMapa][IdKolizji][2] 
+    let OdlegloscGory = mapa[AktualnaMapa][IdKolizji][2]
     let OdlegloscPrawej = mapa[AktualnaMapa][IdKolizji][1]+id[mapa[AktualnaMapa][IdKolizji][0]][3] 
     let OdlegloscDolnej = mapa[AktualnaMapa][IdKolizji][2]+id[mapa[AktualnaMapa][IdKolizji][0]][2]
     let PozycjaGracza=[PozycjaX+25,PozycjaY+25];
@@ -22,11 +22,11 @@ function SprawdzStroneKolizji(IdKolizji)
     if(PozycjaGracza[0]+25>OdlegloscLewej && PozycjaGracza[0]-25<OdlegloscPrawej && ListaAktualnychObiektowDoKolizji[IdKolizji][3])
     {
         ListaAktualnychObiektowDoKolizji[IdKolizji][4]=false;
-        if(PozycjaGracza[1]<OdlegloscGory)
+        if(PozycjaGracza[1]-25<OdlegloscGory)
         {
             return "nad";
         }
-        if(PozycjaGracza[1]>OdlegloscDolnej)
+        if(PozycjaGracza[1]+25>OdlegloscDolnej)
         {
             return "pod";
         }
@@ -35,11 +35,11 @@ function SprawdzStroneKolizji(IdKolizji)
     if(PozycjaGracza[1]+25>OdlegloscGory && PozycjaGracza[1]-25<OdlegloscDolnej && ListaAktualnychObiektowDoKolizji[IdKolizji][4])
     {
         ListaAktualnychObiektowDoKolizji[IdKolizji][3]=false;
-        if(PozycjaGracza[0]<OdlegloscLewej)
+        if(PozycjaGracza[0]-25<OdlegloscLewej)
         {
             return "nalewo";
         }
-        if(PozycjaGracza[0]>OdlegloscPrawej)
+        if(PozycjaGracza[0]+25>OdlegloscPrawej)
         {
             return "naprawo";
         }
@@ -68,18 +68,6 @@ function Kolizje()
 
         if(SprawdzKolizjeX(PozycjaX,50,i,0))
         {
-
-            if(PozycjaX+50 >= mapa[AktualnaMapa][i][1] && ListaAktualnychObiektowDoKolizji[i][2]=="nalewo")
-            {
-                PozycjaX = mapa[AktualnaMapa][i][1]-50;
-                Gracz.style.left = PozycjaX + 'px';
-            }
-            if(PozycjaX < mapa[AktualnaMapa][i][1]+id[mapa[AktualnaMapa][i][0]][3] && ListaAktualnychObiektowDoKolizji[i][2]=="naprawo")
-            {
-                PozycjaX = mapa[AktualnaMapa][i][1]+id[mapa[AktualnaMapa][i][0]][3];
-                Gracz.style.left = PozycjaX + 'px';
-            }
-
             if(SprawdzKolizjeY(PozycjaY,50,i,0))
             {
                 if(NajblizszyObiekt==null && PoprzedniObiekt==null)
@@ -126,6 +114,17 @@ function Kolizje()
                     PozycjaY = mapa[AktualnaMapa][i][2]+id[mapa[AktualnaMapa][i][0]][2];
                     Gracz.style.top = PozycjaY + 'px';
                 }
+            }
+
+            if(PozycjaX+50 >= mapa[AktualnaMapa][i][1] && ListaAktualnychObiektowDoKolizji[i][2]=="nalewo")
+            {
+                PozycjaX = mapa[AktualnaMapa][i][1]-50;
+                Gracz.style.left = PozycjaX + 'px';
+            }
+            if(PozycjaX < mapa[AktualnaMapa][i][1]+id[mapa[AktualnaMapa][i][0]][3] && ListaAktualnychObiektowDoKolizji[i][2]=="naprawo")
+            {
+                PozycjaX = mapa[AktualnaMapa][i][1]+id[mapa[AktualnaMapa][i][0]][3];
+                Gracz.style.left = PozycjaX + 'px';
             }
         }
     }

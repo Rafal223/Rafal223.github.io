@@ -179,6 +179,14 @@ function LiczCzasGry()
 
 function SprawdzGraniceMapy()
 {
+    if(PozycjaY < 0) //do przodu
+    {
+        ZmienMape=0;
+    }
+    if(PozycjaY+50 > OknoY) //do tylu
+    {
+        ZmienMape=1;
+    }
     if(ZmienMape==1)
     {
         PozycjaY = 0;
@@ -218,14 +226,6 @@ function SprawdzGraniceMapy()
             Odbilsie=1;
             CzyLewo*=(-1)/2*(Skok/100);
         }
-    }
-    if(PozycjaY < 0) //do przodu
-    {
-        ZmienMape=0;
-    }
-    if(PozycjaY+50 > OknoY) //do tylu
-    {
-        ZmienMape=1;
     }
 }
 
@@ -283,6 +283,17 @@ function Gra()
         Skocz();
         Skok=100;
     }
+
+    if(trzymaspacje)
+    {
+        MocSkoku=10;
+        CzyLewo=10;
+        if(Skok<100)
+        {
+            Skok += 3.5;
+        }
+    }
+
     grawitacja=10;
 
     if(listagrawitacji.length>0)
