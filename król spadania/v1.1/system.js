@@ -307,6 +307,7 @@ function Gra()
     Kolizje();
     Ruszaj();
     var idessa = requestAnimationFrame(Gra);
+    console.log(idessa);
 }
 
 function DwaZera(num, Totalength)
