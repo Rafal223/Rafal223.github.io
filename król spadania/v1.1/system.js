@@ -335,4 +335,4 @@ var id = [
 RysujObiekty(mapa[AktualnaMapa]);
 RysujGracza();
 var Gracz = document.getElementById('gracz');
-var id = Gra();
+var idessa = Gra();
