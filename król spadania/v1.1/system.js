@@ -334,4 +334,4 @@ var id = [
 RysujObiekty(mapa[AktualnaMapa]);
 RysujGracza();
 var Gracz = document.getElementById('gracz');
-SetInterval(Gra,16);
+setInterval(Gra,16);
