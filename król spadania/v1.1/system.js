@@ -306,7 +306,7 @@ function Gra()
 
     Kolizje();
     Ruszaj();
-    requestAnimationFrame(Gra);
+    var idessa = requestAnimationFrame(Gra);
 }
 
 function DwaZera(num, Totalength)
@@ -335,4 +335,4 @@ var id = [
 RysujObiekty(mapa[AktualnaMapa]);
 RysujGracza();
 var Gracz = document.getElementById('gracz');
-var idessa = Gra();
+Gra();
